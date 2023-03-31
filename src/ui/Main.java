@@ -16,7 +16,7 @@ public class Main{
 		controller = new Controller();
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 
 		Main exe = new Main();
 
@@ -29,7 +29,8 @@ public class Main{
 
 
 		}while(option != 4);
-		System.out.println("Thanks for ussing the programm.")
+		
+		System.out.println("Thanks for ussing the programm.");
 
 
 	}
@@ -37,53 +38,96 @@ public class Main{
 	// Incomplete
 	public void menu() {
 		System.out.println("1. Create a new project: ");
-		System.out.println("2. Search a project before a date.")
+		System.out.println("2. Search a project before a date.");
 		System.out.println("3. Search project after date.");
-		System.out.println("4. Exit ")
+		System.out.println("4. Exit ");
 
 	}
+	public void executeOption(int option)throws Exception{
+        switch (option) {
+            case 1:
+				RegisterProject();
+                break;
+
+            case 2:
+                searchProjectsBeforeDate();
+                break;
+
+            case 3: 
+				searchProjectsAfterDate();
+                break;
+
+            case 4:
+                System.out.println("Exit."); 
+                break; 
+
+            case -1: 
+                System.out.println("Invalid Option!!"); 
+                break; 
+        }
+    }
 
 	//Incomplete
-	public void RegisterProject() {
+	public void RegisterProject() throws Exception{
 		String projectName;
 		String clientName;
-		String beginDate;
-		String endDate;
+		String beginDates;
+		String endDates;
 		double budget;
 
 		System.out.println("Type the name of the project:");
 		projectName = reader.next();
 		System.out.println("Type the name of the client:");
 		clientName = reader.next();
-		System.out.println("Type the date of start:");
-		beginDate = reader.next();
-		System.out.println("Type the date of ending : ");
-		endDate = reader.next();
+		System.out.println("Type the date of start: (Day/Month/year)");
+		beginDates = reader.next();
+		System.out.println("Type the date of ending : (Day/Month/Year) ");
+		endDates = reader.next();
 		System.out.println("Type the budget of the project: ");
-		budget = reader.nextBoolean();
+		budget = reader.nextDouble();
 
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
 		Calendar initialDate = Calendar.getInstance();
-		initialDate.setTime(format.parse(initialDate));
-		Calendar initialDate = Calendar.getInstance();
-		endDate.setTime(format.parse(endDate);)
+		initialDate.setTime(format.parse(beginDates));
+		Calendar endDate = Calendar.getInstance();
+		endDate.setTime(format.parse(endDates));
 
-
-
-
-
-
-
+		boolean  verifier = controller.RegisterProject(projectName, clientName, initialDate, initialDate, budget);
+		if(verifier == true){
+			System.out.println("The project has been registered.");
+		}
+		else{
+			System.out.println("The project has not been registered.");
+		}
 	}
 
 	//Incomplete
-	public void searchProjectsAfterDate() {
+	public void searchProjectsAfterDate() throws Exception{
+		 String dateCompare;
+
+		 System.out.println("Type the date to compare.");
+		 dateCompare = reader.next();
+
+		 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		 Calendar dateToCompare = Calendar.getInstance();
+		 dateToCompare.setTime(format.parse(dateCompare));
+
+		 System.out.println("The projects after the date are/is:  " + controller.searchProjectsAfterDate(dateToCompare));
 
 	}
 	
 	//Incomplete
-	public void searchProjectsBeforeDate() {
+	public void searchProjectsBeforeDate() throws Exception{
+		String dateCompares;
+		
+		System.out.println("Type the date to compare.");
+		dateCompares= reader.next();
+
+		 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		 Calendar dateToCompare = Calendar.getInstance();
+		 dateToCompare.setTime(format.parse(dateCompares));
+
+		 System.out.println("The projects after the date are/is " + controller.searchProjectsAfterDate(dateToCompare));
 
 	}
 	public int validateIntegerInput(){
@@ -98,29 +142,4 @@ public class Main{
         }
         return option; 
     }
-
-	public void executeOption(int option){
-        switch (option) {
-            case 1:
-               
-                break;
-
-            case 2:
-                
-                break;
-
-            case 3: 
-                
-                break;
-
-            case 4:
-                System.out.println("Exit."); 
-                break; 
-
-            case -1: 
-                System.out.println("Invalid Option!!"); 
-                break; 
-        }
-    }
-	
 }
