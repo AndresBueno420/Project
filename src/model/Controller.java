@@ -14,9 +14,19 @@ public class Controller {
 	}
 	
 	//Incomplete
-	public boolean RegisterProject() {
-
-		return false;
+	public boolean RegisterProject(String name, String clientName, Calendar initialDate, Calendar finalDate, double budget) {
+		if()
+			Project project = new Project(String name, String clientName, Calendar initialDate, Calendar finalDate, double budget);
+			int pos = getFirstValidPosition;
+			if(pos != -1){
+				projects[pos]= project;
+				System.out.println("The project has been registered. ");
+				return true;
+			}
+			else{
+				System.out.println("The project has not been registered. ");
+				return false;
+			}
 	}
 
 	//Incomplete
@@ -37,5 +47,16 @@ public class Controller {
 
 		return msg;
 
+	}
+	public int getFirstValidPosition(){
+		int pos = -1; 
+		boolean isFound = false; 
+		for(int i = 0; i < 10 && !isFound; i++){
+			if(projects[i] == null){
+				pos = i; 
+				isFound = true;
+			}
+		}
+		return pos; 
 	}
 }

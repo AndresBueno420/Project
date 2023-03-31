@@ -40,11 +40,11 @@ public class Project{
 		return initialDate;
 	}
 	
-	public String getInitialDateFormated() throws ParseException{
+	public String getInitialDateFormated(String date) throws ParseException{
 		return formatter.format(this.initialDate.getTime());
 	}
 
-	public Calendar getFinalDate(){
+	public Calendar getFinalDate(String dates){
 		return finalDate;
 	}
 
